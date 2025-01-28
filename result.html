@@ -199,7 +199,7 @@
         <!-- الجدول الأول -->
         <table class="custom-table">
             <tr>
-                <th>استمارة تقييم تلميذ وفقا للقرار الوزاري 136 لسنة 2024 <br> الفصل الدراسي الاول للعام الدراسي 2024/2025</th>
+                <th>استمارة تقييم تلميذ وفقا لقرار الوزاري 136 لسنة 2024 <br> الفصل الدراسي الاول للعام الدراسي 2024/2015</th>
             </tr>
             <tr>
                 <th>الصف <span id="gradeLevel"></span> الابتدائي</th>
@@ -242,13 +242,13 @@
         </table>
 
         <!-- جدول النسبة المئوية للحضور -->
-        <table>
+        <!-- <table>
             <tr>
                 <th>المجموع</th>
                 <th><span id="nesba"></span></th>
                 <th>المجموع الكلي 500</th>
             </tr>
-        </table>
+        </table> -->
 
         <!-- جدول إضافي للصف الأول والثاني -->
         <div id="firstSecondGradeTable">
@@ -348,8 +348,7 @@
             document.getElementById('seatNumber').textContent = student['رقم الجلوس'] || 'غير متوفر';
             const gradeLevel = student['الصف'] || 'غير معروف';
             document.getElementById('gradeLevel').textContent = gradeLevel;
-            const nesba = student['النسبة المئوية للحضور'] || 'غير معروف';
-            document.getElementById('nesba').textContent = nesba;
+
 
             const resultTable = document.getElementById('resultTable').getElementsByTagName('tbody')[0];
             const simplifiedTable = document.getElementById('simplifiedTable').getElementsByTagName('tbody')[0];

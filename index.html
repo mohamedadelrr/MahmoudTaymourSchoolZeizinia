@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتيجة مدرسة محمود تيمور الرسميه لغات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* تنسيقات عامة */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #138a8a, #6fb2c7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h2 {
+            color: #fff;
+            font-size: 1.5rem; /* حجم الخط النسبي */
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header img {
+            max-width: 300px;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.375rem; /* حجم الخط النسبي */
+        }
+
+        #loginForm {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #loginForm input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem; /* حجم الخط النسبي */
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            text-align: right;
+        }
+
+        #loginForm input:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+            outline: none;
+        }
+
+        #loginForm button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 1rem; /* حجم الخط النسبي */
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+        }
+
+        #loginForm button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+            box-shadow: 0 0 12px rgba(76, 175, 80, 0.8);
+        }
+
+        .error-message {
+            color: #ff4d4d;
+            margin-top: 10px;
+            font-size: 0.875rem; /* حجم الخط النسبي */
+            text-align: right;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #000000;
+            font-size: 0.875rem; /* حجم الخط النسبي */
+        }
+
+        /* تنسيقات الصور الطائرة */
+        .floating-image {
+            position: absolute;
+            max-width: 100px;
+            height: auto;
+            z-index: 0;
+        }
+
+        .floating-image.left {
+            left: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: floatLeft 6s infinite ease-in-out;
+        }
+
+        .floating-image.right {
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: floatRight 6s infinite ease-in-out;
+        }
+
+        .floating-image.bottom {
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: floatBottom 6s infinite ease-in-out;
+        }
+
+        /* حركات الصور */
+        @keyframes floatLeft {
+            0%, 100% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-50%) translateX(-20px); }
+        }
+
+        @keyframes floatRight {
+            0%, 100% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-50%) translateX(20px); }
+        }
+
+        @keyframes floatBottom {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(20px); }
+        }
+
+        /* تنسيقات العناصر المطلوبة */
+        .doaaa {
+            position: absolute;
+            top: 20px;
+            left: 50%; /* توسيط أفقي */
+            transform: translateX(-50%); /* توسيط أفقي */
+            text-align: right;
+            direction: ltr;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 90%; /* عرض نسبي */
+            max-width: 400px; /* أقصى عرض */
+            text-align: center;
+        }
+
+        .esdar {
+            position: absolute;
+            top: 70px;
+            left: 50%; /* توسيط أفقي */
+            transform: translateX(-50%); /* توسيط أفقي */
+            text-align: right;
+            direction: ltr;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 90%; /* عرض نسبي */
+            max-width: 400px; /* أقصى عرض */
+            text-align: left;
+            text-align: center;
+        }
+
+        /* استعلامات وسائط للشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .header h2 {
+                font-size: 1.25rem; /* حجم الخط النسبي */
+            }
+
+            .header img {
+                max-width: 80px;
+            }
+
+            h1 {
+                font-size: 1.25rem; /* حجم الخط النسبي */
+            }
+
+            #loginForm input {
+                font-size: 0.875rem; /* حجم الخط النسبي */
+            }
+
+            #loginForm button {
+                font-size: 0.875rem; /* حجم الخط النسبي */
+            }
+
+            .footer {
+                font-size: 0.75rem; /* حجم الخط النسبي */
+            }
+
+            .floating-image.left,
+            .floating-image.right {
+                max-width: 80px;
+            }
+
+            .floating-image.bottom {
+                max-width: 80px;
+            }
+
+            .doaaa,
+            .esdar {
+                top: 10px; /* تعديل الموضع */
+                font-size: 0.875rem; /* حجم الخط النسبي */
+            }
+
+            .esdar {
+                top: 60px; /* تعديل الموضع */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h2 {
+                font-size: 1.125rem; /* حجم الخط النسبي */
+            }
+
+            .header img {
+                max-width: 60px;
+            }
+
+            h1 {
+                font-size: 1.125rem; /* حجم الخط النسبي */
+            }
+
+            #loginForm input {
+                font-size: 0.75rem; /* حجم الخط النسبي */
+            }
+
+            #loginForm button {
+                font-size: 0.75rem; /* حجم الخط النسبي */
+            }
+
+            .footer {
+                font-size: 0.625rem; /* حجم الخط النسبي */
+            }
+
+            .floating-image.left,
+            .floating-image.right {
+                max-width: 60px;
+            }
+
+            .floating-image.bottom {
+                max-width: 60px;
+            }
+
+            .doaaa,
+            .esdar {
+                top: 5px; /* تعديل الموضع */
+                font-size: 0.75rem; /* حجم الخط النسبي */
+            }
+
+            .esdar {
+                top: 50px; /* تعديل الموضع */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doaaa">برجاء الدعاء لي ولوالدي بالمغفرة والرحمة</div>
+    <div class="esdar">الاصدار الاول عام 2024/2025</div>
+
+    <!-- الموسيقى -->
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="assets/1.mp3" type="audio/mpeg">
+        المتصفح الخاص بك لا يدعم تشغيل الموسيقى.
+    </audio>
+
+    
+
+    <div class="header animate__animated animate__zoomIn">
+        <h2>نتيجة مدرسة محمود تيمور الرسميه لغات</h2>
+        <img src="assets/OIP.jpg" alt="ولوجو المدرسة" >
+    </div>
+    <div class="container animate__animated animate__flipInX">
+        <h1>تسجيل الدخول</h1>
+        <form id="loginForm">
+            <input type="text" id="seatNumber" name="seatNumber" required placeholder="رقم الجلوس" class="animate__animated animate__fadeInLeft">
+            <button type="submit" class="animate__animated animate__fadeInRight">دخول</button>
+        </form>
+        <div id="errorMessage" class="error-message animate__animated animate__shakeX"></div>
+    </div>
+    <div class="footer animate__animated animate__fadeIn">
+        © 2025. All Rights Reserved.<br>
+        Web Designed by Eng:- Mohamed Adel Hussien<br> 012778783373 / 01228143996 
+    </div>
+
+    <script>
+         // تعطيل النقر بزر الماوس الأيمن
+         document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // تعطيل اختصارات لوحة المفاتيح
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 73 || e.keyCode === 74)) {
+                e.preventDefault();
+            }
+        });
+        // تشغيل الموسيقى تلقائيًا عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('backgroundMusic');
+            audio.play().catch(error => {
+                console.log('تشغيل الموسيقى تلقائيًا غير مدعوم في هذا المتصفح.');
+            });
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const seatNumber = document.getElementById('seatNumber').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            try {
+                // جلب البيانات من ملف JSON
+                const response = await fetch('data.json');
+                const studentData = await response.json();
+
+                let studentResult = null;
+
+                // البحث عن الطالب في جميع الشيتات
+                for (const sheetName in studentData) {
+                    const sheet = studentData[sheetName];
+                    studentResult = sheet.find(student => student['الرقم القومي'] == seatNumber);
+                    if (studentResult) break;
+                }
+
+                if (studentResult) {
+                    localStorage.setItem('studentResult', JSON.stringify(studentResult));
+                    window.location.href = 'result.html'; // انتقال إلى صفحة النتيجة
+                } else {
+                    errorMessage.textContent = 'رقم الجلوس غير صحيح';
+                    errorMessage.classList.add('animate__animated', 'animate__shakeX');
+                    setTimeout(() => {
+                        errorMessage.classList.remove('animate__animated', 'animate__shakeX');
+                    }, 1000);
+                }
+            } catch (error) {
+                errorMessage.textContent = 'حدث خطأ أثناء جلب البيانات';
+                errorMessage.classList.add('animate__animated', 'animate__shakeX');
+                setTimeout(() => {
+                    errorMessage.classList.remove('animate__animated', 'animate__shakeX');
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>

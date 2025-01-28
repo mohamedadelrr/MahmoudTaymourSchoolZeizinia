@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتيجة الطالب</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            direction: rtl;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+            overflow-x: auto;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            direction: rtl;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center; /* نص الخلية في المنتصف */
+            font-size: 0.9rem;
+        }
+        th {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .buttons button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+        }
+        .buttons button:hover {
+            opacity: 0.8;
+        }
+        #logoutButton {
+            background-color: #ff4d4d;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #777;
+            font-size: 0.8rem;
+        }
+
+        /* تنسيقات الطباعة */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+            }
+            .container {
+                width: 100%;
+                max-width: 100%;
+                box-shadow: none;
+                border: none;
+                padding: 10px;
+            }
+            .buttons {
+                display: none;
+            }
+            h1 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+            table {
+                font-size: 0.8rem;
+            }
+            th, td {
+                padding: 6px;
+            }
+            .print-footer {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 20px;
+                padding: 10px;
+                border-top: 1px solid #000;
+            }
+            .print-footer div {
+                text-align: center;
+                width: 30%;
+            }
+            .print-footer div:first-child {
+                text-align: left;
+            }
+            .print-footer div:last-child {
+                text-align: right;
+            }
+            .footer {
+                display: none;
+            }
+        }
+
+        /* تنسيقات الجدول الأول */
+        table.custom-table {
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #000000;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        table.custom-table th {
+            background-color: #ecebeb;
+            color: rgb(0, 0, 0);
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* تنسيقات العناوين الجديدة */
+        .header-info {
+            text-align: right;
+            margin-bottom: 20px;
+            direction: ltr;
+        }
+        .header-info div {
+            margin-bottom: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .m {
+            font-weight: bold;
+        }
+
+        /* تنسيقات صفحة A4 */
+        @page {
+            size: A4;
+            margin: 1cm;
+        }
+
+        /* تصغير الجداول الثلاثة الأخيرة */
+        #firstSecondGradeTable table,
+        #thirdToSixthGradeTable table,
+        table:last-of-type {
+            width: 80%; /* تقليل عرض الجداول */
+            margin: 0 auto; /* توسيط الجداول */
+        }
+
+        /* جدول مبسط */
+        #simplifiedTable {
+            display: none; /* مخفي بشكل افتراضي */
+        }
+    </style>
+</head>
+<body>
+      <!-- الموسيقى -->
+      <audio id="backgroundMusic" autoplay loop>
+        <source src="assets/1.mp3" type="audio/mpeg">
+        المتصفح الخاص بك لا يدعم تشغيل الموسيقى.
+    </audio>
+    <div class="container">
+        <!-- العناوين الجديدة -->
+        <div class="header-info">
+            <div>مديرية التربية والتعليم بمحافظة الإسكندرية</div>
+            <div>إدارة شرق التعليمية</div>
+            <div>مدرسة  محمود تيمور الرسميه لغات</div>
+        </div>
+
+        <!-- الجدول الأول -->
+        <table class="custom-table">
+            <tr>
+                <th>استمارة تقييم تلميذ وفقا لقرار الوزاري 136 لسنة 2024 <br> الفصل الدراسي الاول للعام الدراسي 2024/2015</th>
+            </tr>
+            <tr>
+                <th>الصف <span id="gradeLevel"></span> الابتدائي</th>
+            </tr>
+        </table>
+
+        <!-- معلومات الطالب -->
+        <table>
+            <tr>
+                <th>الاسم</th>
+                <td id="studentName"></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>رقم الجلوس</th>
+                <td id="seatNumber"></td>
+            </tr>
+        </table>
+
+        <!-- جدول تفاصيل المواد -->
+        <table id="resultTable">
+            <thead>
+                <tr id="tableHeaderRow1"></tr>
+                <tr id="tableHeaderRow2"></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <!-- جدول مبسط -->
+        <table id="simplifiedTable">
+            <thead>
+                <tr>
+                    <th>المادة</th>
+                    <th>المجموع (100)</th>
+                    <th>التقدير</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <!-- جدول النسبة المئوية للحضور -->
+        <table>
+            <tr>
+                <th>المجموع</th>
+                <th><span id="nesba"></span></th>
+                <th>المجموع الكلي 500</th>
+            </tr>
+        </table>
+
+        <!-- جدول إضافي للصف الأول والثاني -->
+        <div id="firstSecondGradeTable">
+            <table>
+                <thead>
+                    <tr>
+                        <th>النافذه</th>
+                        <th>الوصف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>القيم واحترام الآخرين</td>
+                        <td id="qeyam"></td>
+                    </tr>
+                    <tr>
+                        <td>التوكتسو</td>
+                        <td id="tokansu"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <th>حالة الطالب</th>
+                <th id="hala"></th>
+            </table>
+        </div>
+
+        <!-- جدول إضافي للصف الثالث والرابع والخامس والسادس -->
+        <div id="thirdToSixthGradeTable">
+            <table>
+                <thead>
+                    <tr>
+                        <th>التربية الفنية</th>
+                        <th>التربية البدنية</th>
+                        <th>التربية الموسيقية</th>
+                        <th>التوكانسو</th>
+                        <th>القيم واحترام الاخرين</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="artEducation"></td>
+                        <td id="physicalEducation"></td>
+                        <td id="musicEducation"></td>
+                        <td id="tokansuu"></td>
+                        <td id="qeyamm"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- تذييل الطباعة -->
+        <div class="print-footer">
+            <div style="display: flex; justify-content: space-between; width: 100%;">
+                <div>
+                    <span class="m">رئيس الكنترول</span><br>
+                    <span>هيام القصبى </span>
+                </div>
+                <div>
+                    <span class="m">مسئول الحاسب الآلي</span><br>
+                    <span>مى احمد</span>
+                </div>
+                <div>
+                    <span class="m">مدير المدرسة</span><br>
+                    <span>جاكلين اديب نظير</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button id="printButton">طباعة النتيجة</button>
+            <button id="logoutButton">خروج</button>
+        </div>
+    </div>
+    <div class="footer">
+        <span class="copyright">© 2025. All Rights Reserved.</span><br>
+        Web Designed by Eng:- Mohamed Adel Hussien <br> 012778783373 / 01228143996 
+    </div>
+
+    <script>
+        
+        // Disable right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 73 || e.keyCode === 74)) {
+                e.preventDefault();
+            }
+        });
+        const student = JSON.parse(localStorage.getItem('studentResult'));
+
+        if (student) {
+            document.getElementById('studentName').textContent = student['الاسم'] || 'غير متوفر';
+            document.getElementById('seatNumber').textContent = student['رقم الجلوس'] || 'غير متوفر';
+            const gradeLevel = student['الصف'] || 'غير معروف';
+            document.getElementById('gradeLevel').textContent = gradeLevel;
+            const nesba = student['النسبة المئوية للحضور'] || 'غير معروف';
+            document.getElementById('nesba').textContent = nesba;
+
+            const resultTable = document.getElementById('resultTable').getElementsByTagName('tbody')[0];
+            const simplifiedTable = document.getElementById('simplifiedTable').getElementsByTagName('tbody')[0];
+            const tableHeaderRow1 = document.getElementById('tableHeaderRow1');
+            const tableHeaderRow2 = document.getElementById('tableHeaderRow2');
+
+            const basicColumns = [
+                { key: 'المادة', label: 'المادة', rowspan: 2 }
+            ];
+
+            const firstSecondGradeColumns = [
+                { key: 'الأداء الصفي', label: 'الأداء الصفي' },
+                { key: 'الأداء المنزلي', label: 'الأداء المنزلي' },
+                { key: 'النشاط الصفي', label: 'النشاط الصفي' },
+                { key: 'التقييمات الأسبوعية', label: 'التقييمات الأسبوعية' },
+                { key: 'المهام الشفهية', label: 'المهام الشفهية' },
+                { key: 'المهام المهارية', label: 'المهام المهارية' },
+                { key: 'المواظبة', label: 'المواظبة' },
+                { key: 'تقييم مبدئي', label: 'تقييم مبدئي' },
+                { key: 'تقييم نهائي', label: 'تقييم نهائي' }
+            ];
+
+            const thirdToSixthGradeColumns = [
+                { key: 'المهام الأدائية', label: 'المهام الأدائية' },
+                { key: 'كراسة الواجب', label: 'كراسة الواجب' },
+                { key: 'كراسة النشاط', label: 'كراسة النشاط' },
+                { key: 'التقييم الأسبوعي', label: 'التقييم الأسبوعي' },
+                { key: 'التقييم الشهري', label: 'التقييم الشهري' },
+                { key: 'المواظبة والسلوك', label: 'المواظبة والسلوك' },
+                { key: 'اختبار الفصل الدراسي الأول', label: 'اختبار الفصل الدراسي الأول' }
+            ];
+
+            const finalColumns = [
+                { key: 'المجموع', label: 'المجموع' },
+                { key: 'اللون', label: 'اللون', rowspan: 2 }
+            ];
+
+            let activeColumns;
+            if (gradeLevel.includes('الاول') || gradeLevel.includes('الثاني')) {
+                activeColumns = basicColumns.concat(firstSecondGradeColumns).concat(finalColumns);
+            } else if (gradeLevel.includes('الثالث') || gradeLevel.includes('الرابع') || gradeLevel.includes('الخامس') || gradeLevel.includes('السادس')) {
+                activeColumns = basicColumns.concat(thirdToSixthGradeColumns).concat(finalColumns);
+            } else {
+                alert('الصف الدراسي غير معروف أو غير مدعوم');
+            }
+
+            // إنشاء الصف الأول من الرأس
+            activeColumns.forEach(column => {
+                const th = document.createElement('th');
+                th.textContent = column.label;
+                if (column.rowspan) {
+                    th.setAttribute('rowspan', column.rowspan);
+                }
+                tableHeaderRow1.appendChild(th);
+            });
+
+            // قائمة مخصصة للكلمات أو الأرقام في الصف الثاني
+            const customLabels = {
+                'الاول': ['20', '20', '20', '20', '10', '5', '5', 'اجتاز / لم يجتاز', 'اجتاز / لم يجتاز','100'],
+                'الثاني': ['20', '20', '20', '20', '10', '5', '5', 'اجتاز / لم يجتاز', 'اجتاز / لم يجتاز','100'],
+                'الثالث': ['10', '5', '5', '5', '10', '5', '60','100'],
+                'الرابع': ['10', '5', '5', '5', '10', '5', '60','100'],
+                'الخامس': ['10', '5', '5', '5', '10', '5', '60','100'],
+                'السادس': ['10', '5', '5', '5', '10', '5', '60','100']
+            };
+
+            // إنشاء الصف الثاني من الرأس (للأعمدة التي لا تحتوي على rowspan)
+            const gradeKey = gradeLevel.includes('الاول') ? 'الاول' :
+                            gradeLevel.includes('الثاني') ? 'الثاني' :
+                            gradeLevel.includes('الثالث') ? 'الثالث' :
+                            gradeLevel.includes('الرابع') ? 'الرابع' :
+                            gradeLevel.includes('الخامس') ? 'الخامس' :
+                            gradeLevel.includes('السادس') ? 'السادس' : '';
+
+            if (customLabels[gradeKey]) {
+                customLabels[gradeKey].forEach(label => {
+                    const th = document.createElement('th');
+                    th.textContent = label;
+                    tableHeaderRow2.appendChild(th);
+                });
+            }
+
+            let materials = [];
+            if (gradeLevel.includes('الاول') || gradeLevel.includes('الثاني') || gradeLevel.includes('الثالث')) {
+                materials = ['عربي', 'الرياضيات', 'اللغة الانجليزية', 'متعدد', 'التربية الدينية', 'اللغة الانجليزية الاضافية'];
+            } else if (gradeLevel.includes('الرابع') || gradeLevel.includes('الخامس') || gradeLevel.includes('السادس')) {
+                materials = ['عربي', 'الرياضيات', 'الدراسات الاجتماعية', 'العلوم', 'اللغة الانجليزية', 'المهارات المهنية', 'ICT', 'التربية الدينية', 'اللغة الانجليزية الاضافية'];
+            } else {
+                alert('الصف الدراسي غير معروف أو غير مدعوم');
+            }
+
+            let showSimplifiedTable = true; // افتراضيًا، نعرض الجدول المبسط
+
+            materials.forEach(material => {
+                const row = resultTable.insertRow();
+                activeColumns.forEach((column, index) => {
+                    const cell = row.insertCell(index);
+                    if (column.key === 'المادة') {
+                        // عرض اسم المادة مباشرةً
+                        cell.textContent = material;
+                    } else {
+                        // البحث عن القيمة في بيانات الطالب
+                        const key = `${material}-${column.key}`;
+                        cell.textContent = student[key] || '0';
+
+                        // إذا كانت هناك بيانات غير المجموع واللون، لا نعرض الجدول المبسط
+                        if (column.key !== 'المجموع' && column.key !== 'اللون' && student[key] && student[key] !== '0') {
+                            showSimplifiedTable = false;
+                        }
+                    }
+                });
+
+                // إضافة الصف إلى الجدول المبسط
+                if (showSimplifiedTable) {
+                    const simplifiedRow = simplifiedTable.insertRow();
+                    const materialCell = simplifiedRow.insertCell(0);
+                    const totalCell = simplifiedRow.insertCell(1);
+                    const colorCell = simplifiedRow.insertCell(2);
+
+                    materialCell.textContent = material;
+                    totalCell.textContent = student[`${material}-المجموع`] || '0';
+                    colorCell.textContent = student[`${material}-اللون`] || 'غير معروف';
+                }
+            });
+
+            // إظهار أو إخفاء الجداول بناءً على البيانات
+            if (showSimplifiedTable) {
+                document.getElementById('resultTable').style.display = 'none';
+                document.getElementById('simplifiedTable').style.display = 'table';
+            } else {
+                document.getElementById('simplifiedTable').style.display = 'none';
+                document.getElementById('resultTable').style.display = 'table';
+            }
+
+            // إظهار أو إخفاء الجداول الإضافية بناءً على الصف الدراسي
+            const firstSecondGradeTable = document.getElementById('firstSecondGradeTable');
+            const thirdToSixthGradeTable = document.getElementById('thirdToSixthGradeTable');
+
+            if (gradeLevel.includes('الاول') || gradeLevel.includes('الثاني')) {
+                firstSecondGradeTable.style.display = 'block';
+                thirdToSixthGradeTable.style.display = 'none';
+
+                document.getElementById('qeyam').textContent = student['القيم واحترام الاخرين'] || 'غير معرف';
+                document.getElementById('tokansu').textContent = student['التوكانسو'] || 'غير معرف'; 
+                document.getElementById('hala').textContent = student['حالة الطالب'] || 'غير معرف'; 
+
+            } else if (gradeLevel.includes('الثالث') || gradeLevel.includes('الرابع') || gradeLevel.includes('الخامس') || gradeLevel.includes('السادس')) {
+                firstSecondGradeTable.style.display = 'none';
+                thirdToSixthGradeTable.style.display = 'block';
+
+                // تعبئة بيانات التربية الفنية والبدنية والموسيقية والتوكانسو
+                document.getElementById('artEducation').textContent = student['التربية الفنية'] || 'غير معرف';
+                document.getElementById('physicalEducation').textContent = student['التربية البدنية'] || 'غير معرف';
+                document.getElementById('musicEducation').textContent = student['التربية الموسيقية'] || 'غير معرف';
+                document.getElementById('tokansuu').textContent = student['التوكانسو'] || 'غير معرف';
+                document.getElementById('qeyamm').textContent = student['القيم واحترام الاخرين'] || 'غير معرف';
+            }
+        } else {
+            alert('لا توجد بيانات للطالب');
+            window.location.href = 'index.html';
+        }
+
+        document.getElementById('printButton').addEventListener('click', function() {
+            window.print();
+        });
+
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            localStorage.removeItem('studentResult');
+            window.location.href = 'index.html';
+        });
+
+
+
+        
+    </script>
+</body>
+</html>
